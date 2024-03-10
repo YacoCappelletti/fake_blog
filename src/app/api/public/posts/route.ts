@@ -4,13 +4,14 @@ import { prisma } from '@/app/libs/prisma';
 export async function GET(req: NextRequest, res: NextResponse) {
     try {
         const posts = await prisma?.post.findMany({
-            skip: 3,
+            //skip: ,
             take: 4,
             include: {
                 comments: true,
                 user: true,
             },
         });
+
         return NextResponse.json({ status: 200, posts });
     } catch (error) {
         if (error instanceof Error) {

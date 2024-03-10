@@ -4,8 +4,7 @@ import Image from 'next/image';
 import Browser from '@/app/components/Browser';
 
 async function getPosts(q: string) {
-    //const url = 'http://localhost:3000/api/public/posts/';
-    const url = 'https://dummyjson.com/posts/search?q=' + q;
+    const url = 'http://localhost:3000/api/public/posts/search/' + q;
 
     const res = await fetch(url, {
         method: 'GET',
@@ -21,16 +20,16 @@ async function getPosts(q: string) {
 
 const Page = async ({ params }: { params: { q: string } }) => {
     const data = await getPosts(params.q);
-    //console.log(data);
+
     return (
         <div className="">
             <h1 className="text-center text-[2rem] my-4">
-                Welcome to Fake Blog
+                Welcome to Fake Blog searched posts
             </h1>
             <Browser />
             <div className="mt-[2rem] w-full flex flex-col items-center space-y-[1rem]">
-                {data.posts && data.posts.length > 0 ? (
-                    data.posts.map((post: any, index: any) => (
+                {Array.isArray(data) && data.length > 0 ? (
+                    data.map((post: any, index: any) => (
                         <Post
                             key={index}
                             image={post.image}

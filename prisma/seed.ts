@@ -32,7 +32,8 @@ async function main() {
                 username: usersData[i].username,
                 password: await hash(usersData[i].password, 12),
                 birthDate: usersData[i].birthDate,
-                image: usersData[i].image,
+                //image: usersData[i].image,
+                image: `https://api.dicebear.com/7.x/lorelei/svg?seed=${i}`,
             },
         });
         users.push(user);

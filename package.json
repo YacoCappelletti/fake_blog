@@ -13,6 +13,7 @@
     },
     "dependencies": {
         "@prisma/client": "^5.9.1",
+        "@sweetalert2/theme-dark": "^5.0.16",
         "@types/bcrypt": "^5.0.2",
         "@types/jsonwebtoken": "^9.0.5",
         "bcrypt": "^5.1.1",
@@ -20,7 +21,9 @@
         "jsonwebtoken": "^9.0.2",
         "next": "14.1.0",
         "react": "^18",
-        "react-dom": "^18"
+        "react-dom": "^18",
+        "sweetalert2": "^11.10.6",
+        "uuidv4": "^6.2.13"
     },
     "devDependencies": {
         "@types/node": "^20.11.19",

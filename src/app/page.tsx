@@ -2,6 +2,7 @@ import React from 'react';
 import Post from './components/Post';
 
 import Browser from './components/Browser';
+import Pagination from './components/Pagination';
 async function getPosts() {
     const url = 'http://localhost:3000/api/public/posts';
 
@@ -19,10 +20,11 @@ async function getPosts() {
 
 const Page = async () => {
     const data = await getPosts();
+    console.log('data', data);
 
     return (
         <div>
-            <h1 className="text-center text-[2rem] mb-2">
+            <h1 className="text-center text-[2.7rem] my-6">
                 Welcome to Fake Blog
             </h1>
             <Browser />
@@ -33,7 +35,7 @@ const Page = async () => {
                             key={index}
                             image={post.image}
                             id={post.id}
-                            heading={post.title}
+                            title={post.title}
                             content={post.body}
                             likes={post.likes}
                             userId={post.userId}
@@ -43,6 +45,7 @@ const Page = async () => {
                     );
                 })}
             </div>
+            <Pagination params={0} />
         </div>
     );
 };

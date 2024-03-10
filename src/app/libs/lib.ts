@@ -1,3 +1,4 @@
+'use server';
 import { SignJWT, jwtVerify } from 'jose';
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
@@ -10,7 +11,7 @@ export async function encrypt(payload: any) {
     return await new SignJWT(payload)
         .setProtectedHeader({ alg: 'HS256' })
         .setIssuedAt()
-        .setExpirationTime('30 min from now')
+        .setExpirationTime('14 days from now')
         .sign(key);
 }
 
@@ -18,12 +19,13 @@ export async function decrypt(input: string): Promise<any> {
     const { payload } = await jwtVerify(input, key, {
         algorithms: ['HS256'],
     });
+
     return payload;
 }
 
 export async function login(formData: FormData) {
     // Verify credentials && get the user
-    'use server';
+
     const url = 'http://localhost:3000/api/auth/login';
     const rawFormData = Object.fromEntries(formData.entries());
     const res = await fetch(url, {
@@ -41,8 +43,8 @@ export async function login(formData: FormData) {
 
     // Save the session in a cookie
     cookies().set('session', session, { expires, httpOnly: true });
-    revalidatePath('/sesion_status');
-    redirect(`/sesion_status`);
+    revalidatePath('/');
+    redirect(`/`);
 }
 
 export async function logout() {
@@ -58,7 +60,12 @@ export async function getSession() {
 
 export async function updateSession(request: NextRequest) {
     const session = request.cookies.get('session')?.value;
-    if (!session) return;
+    if (!session) {
+        return null;
+    }
+    if (!getSession()) {
+        return null;
+    }
 
     // Refresh the session so it doesn't expire
     const parsed = await decrypt(session);
