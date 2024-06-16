@@ -28,9 +28,6 @@ services:
             - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/fake_blog
             - SPRING_DATASOURCE_USERNAME=database_user
             - SPRING_DATASOURCE_PASSWORD=user_password
-            - VIRTUAL_HOST=fake-blog.yacocappelletti/api/v1.es,www.fake-blog.yacocappelletti.es/api/v1
-            - LETSENCRYPT_HOST=pablokbs.com,www.pablokbs.com
-            - LETSENCRYPT_EMAIL=pablo@pablokbs.com
         depends_on:
             - db
 
