@@ -1,0 +1,65 @@
+services:
+    db:
+        image: mysql:8.4.0
+        container_name: fake_blog_database_container
+
+        environment:
+            MYSQL_ROOT_PASSWORD: password
+            MYSQL_USER: database_user
+            MYSQL_PASSWORD: user_password
+            MYSQL_DATABASE: fake_blog
+
+        volumes:
+            - db_data:/var/lib/mysql
+            - ./db_data/db_export.sql:/docker-entrypoint-initdb.d/db_data.sql
+        ports:
+            - '3305:3306'
+
+    backend:
+        build:
+            context: ./fake_blog_backend
+            dockerfile: Dockerfile
+        restart: on-failure
+        container_name: fake_blog_backend_container
+        ports:
+            - '8080:8080'
+
+        environment:
+            - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/fake_blog
+            - SPRING_DATASOURCE_USERNAME=database_user
+            - SPRING_DATASOURCE_PASSWORD=user_password
+            - VIRTUAL_HOST=fake-blog.yacocappelletti/api/v1.es,www.fake-blog.yacocappelletti.es/api/v1
+            - LETSENCRYPT_HOST=pablokbs.com,www.pablokbs.com
+            - LETSENCRYPT_EMAIL=pablo@pablokbs.com
+        depends_on:
+            - db
+
+        command:
+            [
+                './wait-for-it.sh',
+                'db:3306',
+                ' --',
+                'java',
+                '-jar',
+                'java-app.jar',
+            ]
+
+    frontend:
+        build:
+            context: ./fake_blog_frontend
+            dockerfile: Dockerfile
+
+        container_name: fake_blog_frontend_container
+        ports:
+            - '3000:3000'
+        depends_on:
+            - backend
+        environment:
+            - API_URL=fake-blog.
+            - API_IMAGES_URL=https://fake-blog.yacocappelletti.es/images
+            - VIRTUAL_HOST=fake-blog.yacocappelletti.es,www.fake-blog.yacocappelletti.es
+            - LETSENCRYPT_HOST=pablokbs.com,www.pablokbs.com
+            - LETSENCRYPT_EMAIL=pablo@pablokbs.com
+
+volumes:
+    db_data:
