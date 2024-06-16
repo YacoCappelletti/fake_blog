@@ -52,11 +52,9 @@ services:
         depends_on:
             - backend
         environment:
-            - API_URL=fake-blog.
-            - API_IMAGES_URL=https://fake-blog.yacocappelletti.es/images
-            - VIRTUAL_HOST=fake-blog.yacocappelletti.es,www.fake-blog.yacocappelletti.es
-            - LETSENCRYPT_HOST=pablokbs.com,www.pablokbs.com
-            - LETSENCRYPT_EMAIL=pablo@pablokbs.com
+            - API_URL=fake_blog_url
+            - API_IMAGES_URL=images_url
+  
 
 volumes:
     db_data:
