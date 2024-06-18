@@ -89,7 +89,7 @@ The frontend is built with React and uses Vite for bundling. The user interface 
 
 The project uses MySQL as the database. The database schema includes tables for users, posts, comments, likes, and follows.
 
--   db_data/db_export.sql: Initial database schema and data.
+-   `db_data/db_export.sql`: Initial database schema and data.
 
 ### Docker Compose
 
