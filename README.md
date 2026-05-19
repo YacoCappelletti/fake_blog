@@ -1,55 +1,51 @@
 # Fake Blog Platform
 
-Plataforma completa de blogging con React, Spring Boot y MySQL.
+Full-stack blogging platform with React, Spring Boot and MySQL.
 
-## 🛠️ Stack Tecnológico
+## 🛠️ Stack
 
-- **Backend:** Spring Boot (Java) + Spring JPA + Spring Security
+- **Backend:** Spring Boot (Java) + JPA + Security
 - **Frontend:** React.js + CSS3
-- **Base de datos:** H2 (dev) / MySQL (prod)
+- **Database:** H2 (dev) / MySQL (prod)
 - **Build:** Maven
 
-## 📁 Estructura del Proyecto
+## 📁 Structure
 
 ### Backend (`fake_blog_backend/`)
 ```
 ├── src/main/java/com/fake_blog/
-│   ├── config/          # Configuración Spring + seguridad
+│   ├── config/          # Spring config & security
 │   ├── controller/      # REST endpoints
-│   ├── model/           # Entidades JPA
-│   ├── repository/      # Repositories Spring Data
-│   └── service/         # Lógica de negocio
-├── db_data/             # Scripts y exportaciones SQL
+│   ├── model/           # JPA entities
+│   └── service/         # Business logic
 └── pom.xml
 ```
 
 ### Frontend (`fake_blog_frontend/`)
 ```
-├── public/assets/       # Imágenes y assets estáticos
-├── src/
-│   ├── components/      # Componentes React reutilizables
-│   └── App.js           # Componente raíz + routing
-└── package.json
+├── public/assets/       # Static assets
+├── src/components/      # Reusable React components
+└── App.js               # Root + routing
 ```
 
-## 🚀 Funcionalidades
+## 🚀 Features
 
-- ✅ Autenticación de usuarios (registro, login)
-- ✅ CRUD completo de publicaciones
-- ✅ Sistema de comentarios y reacciones
-- ✅ Búsqueda y filtrado
-- ✅ Diseño responsive
+- ✅ User authentication (register, login)
+- ✅ Full CRUD for posts
+- ✅ Comment and reaction system
+- ✅ Search and filtering
+- ✅ Responsive design
 
-## ▶️ Cómo Ejecutar
+## ▶️ Run Locally
 
 ```bash
 # Backend
 cd fake_blog_backend && ./mvnw spring-boot:run
 
-# Frontend  
+# Frontend
 cd fake_blog_frontend && npm install && npm start
 ```
 
 ---
 
-> Proyecto Fullstack Java + React | **Yaco Cappelletti** 🇦🇷→🇪🇸
+> Fullstack project by Yaco Cappelletti
